@@ -1,81 +1,87 @@
-/* jasmine specs for controllers go here */
-describe('Hello World', function() {
+/* jasmine specs for controllers */
+describe('AngularJS Blog Application', function () {
 
-    beforeEach(module('helloWorldApp'));
+    beforeEach(module('blogApp'));
+    //beforeEach(module('angularBlogServices'));
 
-    describe('MainCtrl', function() {
+    describe('BlogCtrl', function () {
         var scope, ctrl;
 
-        beforeEach(inject(function($rootScope, $controller) {
+        beforeEach(inject(function ($rootScope, $controller) {
 
 
             scope = $rootScope.$new();
-            ctrl = $controller('MainCtrl', { $scope: scope });
+            ctrl = $controller('BlogCtrl', {$scope: scope});
         }));
 
 
-        it('should create initialed message', function() {
-            expect(scope.message).toEqual("Hello World");
+        it('should create show blog entry count', function () {
+            console.log("blogList:" + scope.blogList);
+            expect(scope.blogList.length).toEqual(0);
+            //expect(scope.blogList).toBeUndefined();
         });
     });
 
 
-    describe('ShowCtrl', function() {
-        var scope, ctrl;
+    describe('BlogViewCtrl', function () {
+        var scope, ctrl, $httpBackend;
 
-        beforeEach(inject(function($rootScope, $controller) {
+        beforeEach(inject(function (_$httpBackend_, $routeParams, $rootScope, $controller) {
+            $httpBackend =  _$httpBackend_;
+            $httpBackend.expectGET('blogPost').respond({_id: '1'});
+
+            $routeParams.id = '1';
 
             scope = $rootScope.$new();
-            ctrl = $controller('ShowCtrl', { $scope: scope });
+            
+            ctrl = $controller('BlogViewCtrl', {$scope: scope});
         }));
 
-        it('should create initialed message', function() {
-            expect(scope.message).toEqual("Show The World");
+        it('should show blog entry id', function () {            
+            //expect(scope.blogEntry._id).toEqual(1);
+            //expect(scope.blogList).toBeUndefined();
+            expect(scope.blg).toEqual(1);
         });
 
     });
-
-    describe('CustomerCtrl', function() {
+    
+    
+    describe('LoginCtrl', function () {
         var scope, ctrl;
 
-        beforeEach(inject(function($rootScope, $controller) {
+        beforeEach(inject(function ($rootScope, $controller) {
+
 
             scope = $rootScope.$new();
-            ctrl = $controller('CustomerCtrl', { $scope: scope });
+            ctrl = $controller('LoginCtrl', {$scope: scope});
+            scope.submit();
         }));
 
-        it('should create initialed message', function() {
-            expect(scope.customerName).toEqual("Bob's Burgers");
-        });
 
+        it('should show submit success', function () {
+            console.log("LoginCtrl:" + scope.sub);
+            expect(scope.sub).toEqual(true);
+            //expect(scope.blogList).toBeUndefined();
+        });
     });
+    
+    describe('LogoutCtrl', function () {
+        var scope, ctrl;
+
+        beforeEach(inject(function ($rootScope, $controller) {
+
+
+            scope = $rootScope.$new();
+            ctrl = $controller('LogoutCtrl', {$scope: scope});
+        }));
+
+
+        it('should create LogoutCtrl controller', function () {
+            console.log("LogoutCtrl:" + ctrl);
+            expect(ctrl).toBeDefined();
+            //expect(scope.blogList).toBeUndefined();
+        });
+    });
+
+
 });
-
-// describe('AngularJS Blog Application', function() {
-    // beforeEach(module('blogApp'));
-    // describe('BlogCtrl', function() {
-        // var scope, ctrl;
-        // beforeEach(inject(function($rootScope, $controller) {
-            // scope = $rootScope.$new();
-            // ctrl = $controller('BlogCtrl', { $scope: scope });
-        // }));
-        // it('should create show blog entry count', function() {
-            // console.log("blogList:" + scope.blogList.length);
-            // expect(scope.blogList.length).toEqual(2);
-        // });
-    // });
-    // describe('BlogViewCtrl', function() {
-        // var scope, ctrl, $httpBackend;
-        // beforeEach(inject(function(_$httpBackend_,
-            // $routeParams, $rootScope, $controller) {
-            // $httpBackend = _$httpBackend_;
-            // $httpBackend.expectGET('blogPost').respond({ _id: '1' });
-            // $routeParams.id = '1';
-            // scope = $rootScope.$new();
-            // ctrl = $controller('BlogViewCtrl', { $scope: scope });
-        // }));
-        // it('should show blog entry id', function() {
-            // expect(scope.blogEntry._id).toEqual(1);
-        // });
-    // });
-// });

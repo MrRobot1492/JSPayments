@@ -6,9 +6,7 @@
         "karma-firefox-launcher": "*",
         "karma-jasmine": "*",
         "karma-junit-reporter": "*",
-        "karma-coverage": "*"
-    },
-    "dependencies": {
-        "gulp": "^4.0.2"
+        "karma-coverage": "*",
+        "karma-ng-html2js-preprocessor": "~0.1"
     }
 }
