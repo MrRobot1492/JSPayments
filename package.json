@@ -1,0 +1,14 @@
+{
+    "name": "package.json",
+    "devDependencies": {
+        "karma": "*",
+        "karma-chrome-launcher": "*",
+        "karma-firefox-launcher": "*",
+        "karma-jasmine": "*",
+        "karma-junit-reporter": "*",
+        "karma-coverage": "*"
+    },
+    "dependencies": {
+        "gulp": "^4.0.2"
+    }
+}
